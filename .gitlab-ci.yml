@@ -1,0 +1,15 @@
+image: node:24
+
+pages:
+  stage: deploy
+  script:
+    - npm install
+    - npx quartz build
+    - rm -rf public # ลบโฟลเดอร์เดิม (ถ้ามี)
+    - mv public _public
+    - mv _public public
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
